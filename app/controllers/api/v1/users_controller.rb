@@ -12,16 +12,6 @@ module Api
             end
         end
 
-        def index
-          @users = User.all
-          render json: @users
-        end
-
-        def show
-          @user = AuthorizeApiRequest.call(request.headers).result
-          render json: @user
-        end
-
         private
 
         def user_params
