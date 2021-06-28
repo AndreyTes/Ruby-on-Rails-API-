@@ -37,5 +37,5 @@ $ rails server
 
 On successful autenticate, `{"auth_token": <token>}` will be returned. This token will be expired after 24 hours.
 
-**In order to access the posts and comments, add `-H 'Authorization: <token>'` to the header of every request for CRUD operations.**
+**In order to access the posts and comments, add `'Authorization: <token>'` to the header of every request for CRUD operations.**
 
