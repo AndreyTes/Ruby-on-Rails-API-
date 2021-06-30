@@ -1,7 +1,7 @@
 module Api
     module V1
       class PostsController < ApplicationController
-        before_action :get_user
+        before_action :get_user, only:[:create, :update, :destroy]
 
         def index
           posts = Post.order('created_at DESC')
@@ -9,14 +9,18 @@ module Api
         end
 
         def show
-          post = @user.posts.find(params[:id])
-          render json: {status: 'SUCCESS', message:'Loaded posts', data:post}, status: :ok
+          post = Post.find_by(id: params[:id])
+          if post
+            render json: {status: 'SUCCESS', message:'Loaded posts', data:post}, status: :ok
+          else
+            render json: {status: 'ERROR', message: 'Post undefined' }, status: :not_found
+          end
         end
 
         def create
           post = @user.posts.create(post_params)
           if post.save
-          render json: {status: 'SUCCESS', message: 'Post saved' , data: post}, status: :ok
+            render json: {status: 'SUCCESS', message: 'Post saved' , data: post}, status: :ok
           else
             render json: {status: 'ERROR', message: 'Post not saved' , data: post.errors}, status: :unprocessable_entity
           end

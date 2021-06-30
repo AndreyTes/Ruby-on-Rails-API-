@@ -4,6 +4,7 @@ Rails.application.routes.draw do
         resources :posts do
           resources :comments
         end
+        #get 'comments' => 'comments#index'
         post 'register' => 'users#create'
         post 'authenticate' => 'authentication#authenticate'
       end

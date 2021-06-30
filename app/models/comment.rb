@@ -1,4 +1,5 @@
 class Comment < ApplicationRecord
   belongs_to :post
-  validates_presence_of :description
+  belongs_to :user
+  validates_presence_of :title, :description
 end

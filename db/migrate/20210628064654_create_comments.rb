@@ -4,6 +4,7 @@ class CreateComments < ActiveRecord::Migration[6.1]
       t.text :title
       t.text :description
       t.references :post
+      t.references :user
       t.timestamps
     end
   end
