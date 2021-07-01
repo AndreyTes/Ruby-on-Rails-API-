@@ -5,7 +5,6 @@ module Api
 
         def authenticate
           command = AuthenticateUser.call(params[:email], params[:password])
-          #cur_user =AuthorizeApiRequest.call(request.headers).result
           if command.successful?
             render(json: {status: 'SUCCESS', message:'Authenticate success'})
             headers['Authorization'] = command.result

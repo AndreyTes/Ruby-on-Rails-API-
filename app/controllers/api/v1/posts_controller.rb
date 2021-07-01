@@ -27,19 +27,24 @@ module Api
         end
 
         def update
-          post = @user.posts.find(params[:id])
-          if post.update(post_params)
-              render json: {status: 'SUCCESS', message:'Updated post', data:post}, status: :ok
-            else
-              render json: {status: 'ERROR', message:'Post not updated', data:post.errors}, status: :unprocessable_entity
+          post = @user.posts.find_by(id: params[:id])
+          if post.nil?
+            render json: {status: 'ERROR', message:'You cant update alien post'}, status: :unprocessable_entity
+          else
+            post.update(post_params)
+            render json: {status: 'SUCCESS', message:'Updated post', data:post}, status: :ok
           end
         end
 
-          def destroy
-            post = @user.posts.find(params[:id])
+        def destroy
+          post = @user.posts.find_by(id: params[:id])
+          if post.nil?
+            render json: {status: 'ERROR', message:'You cant delete alien post'}, status: :unprocessable_entity
+          else
             post.destroy
             render json: {status: 'SUCCESS', message:'Deleted post', data: post}, status: :ok
           end
+        end
 
         private
 
